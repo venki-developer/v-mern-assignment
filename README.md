@@ -4,10 +4,11 @@ Simple website that supports orders with minimal details. It is as part of the a
 Please clone the repository to run in your local machine.
 
 Please install the packages using the below command:
+<br>
   `
-  yarn install
+  yarn install`
   or
-  npm install`
+  `npm install`
 
 Please follow the below commands to run the server and client;
 
