@@ -13,4 +13,15 @@ Please install the packages using the below command:
 Please follow the below commands to run the server and client;
 
 For running the backend
+<br>
+`nodemon index.js`
+or
+`node index.js`
+
+For running the client
+<br>
+`cd client`
+and
+`yarn start`
+
 
