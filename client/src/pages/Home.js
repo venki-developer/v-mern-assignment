@@ -20,16 +20,16 @@ const Home = () => {
       console.log(values);
       try{
         dispatch(ShowLoading());
-        const res = await axios.post('http://localhost:4000/api/users/get-user-by-id',{},
+        const res = await axios.post('https://voosh-api.onrender.com/api/users/get-user-by-id',{},
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        console.log(res.data);
+        // console.log(res.data);
         if(res.data.success){
-          const response = await axios.post('http://localhost:4000/api/orders/add-order',{...values,userId:res.data.data._id});
-          console.log(response.data)
+          const response = await axios.post('https://voosh-api.onrender.com/api/orders/add-order',{...values,userId:res.data.data._id});
+          // console.log(response.data)
           dispatch(HideLoading());
           if(response.data.success)
           {
@@ -60,10 +60,10 @@ const Home = () => {
     <h1 className="text-lg">Place an order</h1>
     <hr />
         <Form layout='vertical' form={form} onFinish={onFinish}>
-            <Form.Item label='Subtotal' name='subtotal'>
+            <Form.Item label='Subtotal' name='subtotal'rules={[{ required: true, message: 'Please input your Order amount!' }]} >
                 <input type="number"/>
             </Form.Item>
-            <Form.Item label='Phone' name='phone'>
+            <Form.Item label='Phone' name='phone' rules={[{ required: true, message: 'Please input your phone number!' }, { len: 10, message: 'Phone number must be 10 digits long' }]}>
                 <input type="text"/>
             </Form.Item>
             <div className="d-flex justify-content-between align-items-center my-3">

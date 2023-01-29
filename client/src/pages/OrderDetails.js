@@ -18,16 +18,18 @@ const OrderDetails = () => {
         }
     ,[])
     const [form] = Form.useForm();
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const onFinish = async(values) =>{
         try{
 
             dispatch(ShowLoading());
-            const response = await axios.get(`http://localhost:4000/api/orders/get-order/${values.userId}`);
-            console.log(response.data);
+            const response = await axios.get(`https://voosh-api.onrender.com/api/orders/get-order/${values.userId}`);
+            // console.log(response.data);
             dispatch(HideLoading());
-            if(response.data.success) {
+            if(response.data.success && response.data.data.length==0){
+              message.success({content:"No orders found"});
+            }
+            else if(response.data.success) {
                 message.success(response.data.message);
                 setData(response.data.data);
               }else{

@@ -15,13 +15,13 @@ const Login = () => {
         try{
 
             dispatch(ShowLoading());
-            const response = await axios.post('http://localhost:4000/api/users/login-user',values);
+            const response = await axios.post('https://voosh-api.onrender.com/api/users/login-user',values);
             // console.log(response);
             dispatch(HideLoading());
             if(response.data.success) {
                 message.success(response.data.message);
                 localStorage.setItem("token", response.data.data);
-                localStorage.setItem("userId", response.data.userId)
+                localStorage.setItem("userId", response.data.userId);
                 navigate('/login');
               }else{
                 message.error(response.data.message);
@@ -39,10 +39,10 @@ const Login = () => {
         <h1 className="text-lg">Login</h1>
         <hr />
             <Form layout='vertical' initialValues={{ email: '', password: '' }} form={form} onFinish={onFinish}>
-                <Form.Item label='Phone' name='phone'>
+                <Form.Item label='Phone' name='phone' rules={[{ required: true, message: 'Please input your phone number!' }, { len: 10, message: 'Phone number must be 10 digits long' }]}>
                 <input type="text" />
                 </Form.Item>
-                <Form.Item label='Password' name='password'>
+                <Form.Item label='Password' name='password' rules={[{ required: true, message: 'Please input your password!' }]}>
                 <input type="password" />
                 </Form.Item>
                 <div className="d-flex justify-content-between align-items-center my-3">
